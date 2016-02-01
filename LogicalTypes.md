@@ -37,6 +37,18 @@ may require additional metadata fields, as well as rules for those fields.
 `UTF8` may only be used to annotate the binary primitive type and indicates
 that the byte array should be interpreted as a UTF-8 encoded character string.
 
+### ENUM
+
+`ENUM` may only be used to annotate the binary primitive type and indicates
+that the byte array should be interpreted as a UTF-8 encoded character string
+(which typically is the "name" of the enum value, for instance [here](https://github.com/apache/parquet-mr/blob/master/parquet-avro/src/main/java/org/apache/parquet/avro/AvroWriteSupport.java#L268)
+in `AvroWriteSupport` and [here](https://github.com/apache/parquet-mr/blob/master/parquet-protobuf/src/main/java/org/apache/parquet/proto/ProtoWriteSupport.java#L310) in `ProtoWriteSupport`).
+
+However, there are exceptions where, for instance in Thrift, the protocol layer never sees
+enums (see [here](https://github.com/apache/parquet-mr/blob/c3819688c48480ec75a9563c71f18ea755e34620/parquet-thrift/src/main/java/org/apache/parquet/thrift/ProtocolReadToWrite.java#L79)
+and [here](https://github.com/apache/parquet-mr/blob/c3819688c48480ec75a9563c71f18ea755e34620/parquet-thrift/src/main/java/org/apache/parquet/thrift/BufferedProtocolReadToWrite.java#L225)), as enums are already written
+as a Thrift i32 field.
+
 ## Numeric Types
 
 ### Signed Integers
